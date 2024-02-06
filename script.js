@@ -2,20 +2,25 @@ var button = document.getElementById("enter");
 var input = document.getElementById("userInput");
 var ul = document.querySelector("ul");
 
-button.addEventListener("click", function() {
-    if (input.value.length > 0) {
-        var li = document.createElement("li");
+function inputLength() {
+    return input.value.length;
+}
+
+function createListElement() {
+    var li = document.createElement("li");
     li.appendChild(document.createTextNode(input.value));
     ul.appendChild(li);
     input.value = "";
+}
+
+button.addEventListener("click", function() {
+    if (inputLength() > 0) {
+        createListElement();
     }
 })
 
 input.addEventListener("keydown", function (event) {
-    if (input.value.length > 0 && event.key === "Enter") {
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(input.value));
-        ul.appendChild(li);
-        input.value = "";
+    if (inputLength() > 0 && event.key === "Enter") {
+        createListElement();
     }
 })
